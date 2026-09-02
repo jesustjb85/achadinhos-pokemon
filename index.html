@@ -28,33 +28,23 @@
   <header class="hero">
     <div class="container">
 
-      <!--
-        Avatar do grupo: SVG de placeholder no estilo pokébola.
-        Quando a arte oficial (foto/logo do PromoPokémon) chegar, troque o <svg> por:
-        <img src="avatar.jpg" alt="PromoPokémon" width="92" height="92" loading="eager" fetchpriority="high" />
-      -->
       <div class="avatar-wrap">
         <div class="avatar">
-          <svg viewBox="0 0 100 100" role="img" aria-label="Logo PromoPokémon">
-            <circle cx="50" cy="50" r="47" fill="#fff" stroke="#1a1a1a" stroke-width="4"/>
-            <path d="M3,50 a47,47 0 0 1 94,0 Z" fill="var(--red)"/>
-            <rect x="3" y="47" width="94" height="6" fill="#1a1a1a"/>
-            <circle cx="50" cy="50" r="16" fill="#fff" stroke="#1a1a1a" stroke-width="5"/>
-            <circle cx="50" cy="50" r="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/>
-          </svg>
+          <img src="avatar.jpg" alt="PromoPokémon" width="1280" height="960" loading="eager" fetchpriority="high" />
         </div>
         <span class="avatar-online" aria-hidden="true"></span>
       </div>
       <p class="avatar-caption">PromoPokémon <span class="dot" aria-hidden="true">•</span> 🟢 ativo agora</p>
 
-      <h1>Achadinhos de <span class="highlight">Pokémon</span> 🔥</h1>
+      <h1>Grupo VIP <span class="highlight">PromoPokémon</span> 🔥</h1>
       <p class="subtitle">
-        Preços muito abaixo do mercado, cupons escondidos e promoções relâmpago —
-        direto no seu WhatsApp, todos os dias.
+        Preços muito abaixo do mercado, cupons escondidos e a menor oferta histórica
+        revelada todo santo dia — direto no seu WhatsApp.
       </p>
 
       <div class="proof-row">
         <span class="proof-pill">✅ 100% gratuito</span>
+        <span class="proof-pill">📉 Menor preço histórico todo dia</span>
         <!-- Preencha MEMBER_COUNT em script.js com o número real de membros para este selo aparecer -->
         <span class="proof-pill" id="member-pill" hidden>👥 <span id="member-count"></span> membros</span>
       </div>
@@ -105,23 +95,23 @@
     </section>
 
     <section class="coupon-teaser container">
-      <h2>Uma prévia dos cupons da semana 👀</h2>
-      <p class="section-sub">Desbloqueados todo dia só pra quem tá no grupo.</p>
+      <h2>Ofertas de hoje no grupo 👀</h2>
+      <p class="section-sub">Duas já reveladas — a próxima só aparece pra quem tá no grupo.</p>
       <div class="grid">
-        <div class="coupon-card">
-          <span class="lock">🔒</span>
-          <span class="blurred">PK7X-92KD</span>
-          <span class="coupon-label">Desconto surpresa</span>
+        <div class="coupon-card revealed">
+          <span class="coupon-icon">🏷️</span>
+          <span class="coupon-name">Mini BB Heróis Excelsos</span>
+          <span class="coupon-price">R$ 199,81</span>
+        </div>
+        <div class="coupon-card revealed">
+          <span class="coupon-icon">🏷️</span>
+          <span class="coupon-name">Box Booster 36 Caos Ascendente</span>
+          <span class="coupon-price">R$ 240,94</span>
         </div>
         <div class="coupon-card">
           <span class="lock">🔒</span>
-          <span class="blurred">FR3E-8821</span>
-          <span class="coupon-label">Frete grátis</span>
-        </div>
-        <div class="coupon-card">
-          <span class="lock">🔒</span>
-          <span class="blurred">B0X-1550</span>
-          <span class="coupon-label">Box com desconto</span>
+          <span class="blurred">????-????</span>
+          <span class="coupon-label">Oferta surpresa</span>
         </div>
       </div>
       <a href="#" class="btn-cta whatsapp-link" target="_blank" rel="noopener">Quero desbloquear os cupons</a>

@@ -18,13 +18,12 @@ inventados, isso quebra a confiança de quem visita a página.
 
 ## Como trocar o avatar do grupo
 
-O hero usa um ícone de pokébola em SVG como placeholder no lugar da foto/logo do
-grupo. Quando tiver a arte oficial, abra [index.html](index.html), procure o
-comentário `Avatar do grupo` dentro de `.avatar` e troque o `<svg>` por:
-
-```html
-<img src="avatar.jpg" alt="PromoPokémon" width="92" height="92" loading="eager" fetchpriority="high" />
-```
+O hero usa [avatar.jpg](avatar.jpg) (arte oficial "Pokémon Day 2025" da Nintendo/Game
+Freak/Creatures) como foto do grupo — **atenção**: é uma imagem com direitos autorais
+de terceiros, usada aqui a pedido explícito e ciente do risco de notificação de
+remoção/direitos autorais, já que o site se declara não afiliado a essas empresas.
+Pra trocar por outra imagem, basta substituir o arquivo `avatar.jpg` (mantenha o
+mesmo nome) ou editar o `src` da tag `<img>` dentro de `.avatar` em [index.html](index.html).
 
 ## Rodar localmente
 

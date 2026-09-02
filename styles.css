@@ -92,9 +92,11 @@ summary:focus-visible {
     0 10px 28px rgba(255, 203, 5, 0.25);
 }
 
-.avatar svg {
+.avatar img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
   display: block;
 }
 
@@ -297,6 +299,28 @@ section h2 {
 .coupon-card .coupon-label {
   color: var(--text-dim);
   font-size: 0.85rem;
+}
+
+.coupon-card.revealed {
+  border-style: solid;
+  border-color: var(--green);
+  background: linear-gradient(145deg, #223a2c, #1c1c28);
+}
+
+.coupon-card .coupon-icon {
+  font-size: 1.5rem;
+}
+
+.coupon-card .coupon-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.coupon-card .coupon-price {
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--green);
 }
 
 .faq {
