@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Achadinhos Pokémon — Cupons e Preços Baixos</title>
-  <meta name="description" content="Cupons escondidos, achadinhos e preços muito abaixo do mercado em cartas Pokémon. Entre no grupo do WhatsApp e não perca nenhuma promoção." />
+  <meta name="theme-color" content="#12121a" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>PromoPokémon — Achadinhos e Cupons de Cartas Pokémon</title>
+  <meta name="description" content="Cupons escondidos, achadinhos e preços muito abaixo do mercado em cartas Pokémon. Entre no grupo PromoPokémon no WhatsApp e não perca nenhuma promoção." />
 
   <!-- Open Graph (preview ao compartilhar o link no WhatsApp) -->
-  <meta property="og:title" content="Achadinhos Pokémon — Cupons e Preços Baixos" />
+  <meta property="og:title" content="PromoPokémon — Achadinhos e Cupons de Cartas Pokémon" />
   <meta property="og:description" content="Cupons escondidos, achadinhos e preços muito abaixo do mercado. Entre no grupo e garanta o seu." />
   <meta property="og:type" content="website" />
 
@@ -20,17 +22,42 @@
 
   <!-- Faixa de urgência -->
   <div class="top-bar">
-    ⚡ Novos cupons revelados toda semana no grupo — vagas limitadas
+    ⚡ Vagas limitadas · cupons novos revelados toda semana no grupo
   </div>
 
   <header class="hero">
     <div class="container">
-      <span class="badge">🎴 Comunidade de achadinhos</span>
-      <h1>Cartas Pokémon com <span class="highlight">cupons que ninguém te conta</span> 🔥</h1>
+
+      <!--
+        Avatar do grupo: SVG de placeholder no estilo pokébola.
+        Quando a arte oficial (foto/logo do PromoPokémon) chegar, troque o <svg> por:
+        <img src="avatar.jpg" alt="PromoPokémon" width="92" height="92" loading="eager" fetchpriority="high" />
+      -->
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Logo PromoPokémon">
+            <circle cx="50" cy="50" r="47" fill="#fff" stroke="#1a1a1a" stroke-width="4"/>
+            <path d="M3,50 a47,47 0 0 1 94,0 Z" fill="var(--red)"/>
+            <rect x="3" y="47" width="94" height="6" fill="#1a1a1a"/>
+            <circle cx="50" cy="50" r="16" fill="#fff" stroke="#1a1a1a" stroke-width="5"/>
+            <circle cx="50" cy="50" r="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/>
+          </svg>
+        </div>
+        <span class="avatar-online" aria-hidden="true"></span>
+      </div>
+      <p class="avatar-caption">PromoPokémon <span class="dot" aria-hidden="true">•</span> 🟢 ativo agora</p>
+
+      <h1>Achadinhos de <span class="highlight">Pokémon</span> 🔥</h1>
       <p class="subtitle">
         Preços muito abaixo do mercado, cupons escondidos e promoções relâmpago —
         direto no seu WhatsApp, todos os dias.
       </p>
+
+      <div class="proof-row">
+        <span class="proof-pill">✅ 100% gratuito</span>
+        <!-- Preencha MEMBER_COUNT em script.js com o número real de membros para este selo aparecer -->
+        <span class="proof-pill" id="member-pill" hidden>👥 <span id="member-count"></span> membros</span>
+      </div>
 
       <a href="#" id="cta-hero" class="btn-cta whatsapp-link" target="_blank" rel="noopener">
         <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -38,9 +65,17 @@
         </svg>
         Entrar no grupo do WhatsApp
       </a>
-      <p class="microcopy">Gratuito · Sem enrolação · Saia quando quiser</p>
+      <p class="microcopy">Grátis · Vagas limitadas · Saia quando quiser</p>
     </div>
   </header>
+
+  <nav class="chips-row" aria-label="Categorias de ofertas">
+    <span class="chip">🎴 Cartas Avulsas</span>
+    <span class="chip">📦 Boxes &amp; ETBs</span>
+    <span class="chip">🗂️ Coleções</span>
+    <span class="chip">🎁 Sorteios</span>
+    <span class="chip">⚡ Ofertas Relâmpago</span>
+  </nav>
 
   <main>
     <section class="benefits container">
@@ -116,11 +151,12 @@
       <h2>Não perca o próximo cupom 🎯</h2>
       <p>Entre agora e fique por dentro de todo achadinho antes que acabe.</p>
       <a href="#" class="btn-cta whatsapp-link" target="_blank" rel="noopener">Entrar no grupo agora</a>
+      <p class="microcopy">Grátis · Vagas limitadas · Saia quando quiser</p>
     </section>
   </main>
 
   <footer>
-    <p>Feito por fãs, para fãs. Este site não é afiliado, endossado ou associado à Pokémon Company, Nintendo, Game Freak ou Creatures Inc.</p>
+    <p>PromoPokémon é feito por fãs, para fãs. Este site não é afiliado, endossado ou associado à Pokémon Company, Nintendo, Game Freak ou Creatures Inc.</p>
     <p>As promoções divulgadas são de lojas e vendedores terceiros — consulte sempre as condições antes de comprar.</p>
   </footer>
 
@@ -130,6 +166,6 @@
     </svg>
   </a>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

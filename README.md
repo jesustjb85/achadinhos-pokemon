@@ -9,6 +9,23 @@ Abra [script.js](script.js) e troque a constante `WHATSAPP_LINK` pelo link real
 do seu grupo/comunidade (ex: `https://chat.whatsapp.com/XXXXXXXXXXXXXXXXXXXXXX`).
 Todos os botões da página usam esse mesmo valor — não precisa editar o HTML.
 
+## Como exibir o número de membros
+
+Em [script.js](script.js), preencha a constante `MEMBER_COUNT` com o número real
+de membros do grupo (ex: `"12.500"`) para o selo de prova social aparecer ao lado
+do botão no hero. Deixe em branco (`""`) para manter o selo oculto — evite números
+inventados, isso quebra a confiança de quem visita a página.
+
+## Como trocar o avatar do grupo
+
+O hero usa um ícone de pokébola em SVG como placeholder no lugar da foto/logo do
+grupo. Quando tiver a arte oficial, abra [index.html](index.html), procure o
+comentário `Avatar do grupo` dentro de `.avatar` e troque o `<svg>` por:
+
+```html
+<img src="avatar.jpg" alt="PromoPokémon" width="92" height="92" loading="eager" fetchpriority="high" />
+```
+
 ## Rodar localmente
 
 Não precisa de instalação nem build. Basta abrir `index.html` no navegador,
