@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Estatísticas — PromoPokémon (interno)</title>
+  <style>
+    :root {
+      --bg: #12121a;
+      --card: #1b1b26;
+      --border: #2c2c3a;
+      --text: #f4f4f7;
+      --text-dim: #9a9aa8;
+      --yellow: #ffcb05;
+      --green: #25d366;
+      --red: #ee1515;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      padding: 24px 16px 60px;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; }
+    h1 { font-size: 1.4rem; margin: 0 0 4px; }
+    .sub { color: var(--text-dim); font-size: 0.85rem; margin: 0 0 24px; }
+
+    .gate {
+      max-width: 360px;
+      margin: 80px auto;
+      text-align: center;
+    }
+    .gate input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 1rem;
+      margin: 12px 0;
+    }
+    .gate button, .toolbar button {
+      background: var(--green);
+      color: #073b21;
+      border: none;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .toolbar .meta { color: var(--text-dim); font-size: 0.8rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .stat .label { color: var(--text-dim); font-size: 0.78rem; margin-bottom: 6px; }
+    .stat .value { font-size: 1.6rem; font-weight: 800; }
+    .stat .value.yellow { color: var(--yellow); }
+    .stat .value.green { color: var(--green); }
+
+    section.block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    section.block h2 {
+      font-size: 0.95rem;
+      margin: 0 0 14px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.85rem; }
+    .bar-row .bar-label { width: 90px; flex: 0 0 auto; color: var(--text-dim); }
+    .bar-row .bar-track { flex: 1; background: #26263400; background: #26263a; border-radius: 999px; height: 10px; overflow: hidden; }
+    .bar-row .bar-fill { height: 100%; background: var(--yellow); border-radius: 999px; }
+    .bar-row .bar-value { width: 70px; flex: 0 0 auto; text-align: right; font-variant-numeric: tabular-nums; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    table th, table td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--border); }
+    table th { color: var(--text-dim); font-weight: 600; }
+    table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .error { color: #ff8a8a; }
+    .hint { color: var(--text-dim); font-size: 0.8rem; margin-top: 6px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="gate" id="gate">
+      <h1>🔒 Estatísticas</h1>
+      <p class="sub">Página interna — não é linkada em lugar nenhum do site.</p>
+      <input type="password" id="key-input" placeholder="Chave (STATS_KEY)" autocomplete="off" />
+      <div><button id="key-submit">Ver estatísticas</button></div>
+      <p class="hint" id="gate-error"></p>
+    </div>
+
+    <div id="dashboard" hidden>
+      <div class="toolbar">
+        <div>
+          <h1>📊 Estatísticas — PromoPokémon</h1>
+          <p class="sub">Dados anônimos coletados pelo próprio site (sem serviço de terceiro).</p>
+        </div>
+        <div style="text-align:right">
+          <button id="refresh-btn">Atualizar</button>
+          <p class="meta" id="meta-line"></p>
+        </div>
+      </div>
+
+      <p class="error" id="load-error" hidden></p>
+
+      <div class="grid" id="overview-grid"></div>
+
+      <section class="block">
+        <h2>Rolagem da página (scroll)</h2>
+        <div id="scroll-bars"></div>
+        <p class="hint">% de visitas que desceram até cada marco da página.</p>
+      </section>
+
+      <section class="block">
+        <h2>Cliques por botão</h2>
+        <table id="clicks-table">
+          <thead><tr><th>Botão</th><th>Cliques</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="block">
+        <h2>Visitas por dia</h2>
+        <table id="days-table">
+          <thead><tr><th>Dia</th><th>Pageviews</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="block">
+        <h2>Origem (utm_source)</h2>
+        <table id="utm-table">
+          <thead><tr><th>Origem</th><th>Pageviews</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p class="hint">Vem do parâmetro <code>utm_source</code> no link do anúncio (ex: <code>?utm_source=facebook</code>). Sem isso, cai em "direto".</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const LOC_LABELS = {
+      hero: "Topo (hero)",
+      teaser: "Cupons (teaser)",
+      final: "CTA final",
+      floating: "Flutuante",
+      desconhecido: "Desconhecido",
+    };
+
+    function getStoredKey() {
+      const fromUrl = new URLSearchParams(location.search).get("key");
+      if (fromUrl) return fromUrl;
+      try {
+        return localStorage.getItem("ap_stats_key") || "";
+      } catch {
+        return "";
+      }
+    }
+
+    function storeKey(key) {
+      try {
+        localStorage.setItem("ap_stats_key", key);
+      } catch {
+        // sem localStorage, sem problema — só não fica salvo pra próxima vez
+      }
+    }
+
+    function renderBars(container, data, total) {
+      container.innerHTML = "";
+      [25, 50, 75, 100].forEach((m) => {
+        const count = data[m] || 0;
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.innerHTML = `
+          <span class="bar-label">${m}%+</span>
+          <span class="bar-track"><span class="bar-fill" style="width:${pct}%"></span></span>
+          <span class="bar-value">${pct}% (${count})</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function renderTable(tbody, entries, labelMap) {
+      tbody.innerHTML = "";
+      if (entries.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="2" class="hint">Sem dados ainda.</td></tr>`;
+        return;
+      }
+      entries.forEach(([key, value]) => {
+        const tr = document.createElement("tr");
+        const label = labelMap ? labelMap[key] || key : key;
+        tr.innerHTML = `<td>${label}</td><td class="num">${value}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderStat(container, label, value, cls) {
+      const div = document.createElement("div");
+      div.className = "stat";
+      div.innerHTML = `<div class="label">${label}</div><div class="value ${cls || ""}">${value}</div>`;
+      container.appendChild(div);
+    }
+
+    async function loadStats(key) {
+      const errorEl = document.getElementById("load-error");
+      errorEl.hidden = true;
+      const res = await fetch(`/api/stats?key=${encodeURIComponent(key)}`);
+      if (!res.ok) {
+        throw new Error(res.status === 401 ? "Chave inválida." : `Erro ao carregar (${res.status}).`);
+      }
+      return res.json();
+    }
+
+    function render(data) {
+      const overview = document.getElementById("overview-grid");
+      overview.innerHTML = "";
+      renderStat(overview, "Pageviews", data.totalPageviews, "yellow");
+      renderStat(overview, "Sessões únicas", data.uniqueSessions);
+      renderStat(overview, "Cliques no WhatsApp", data.totalClicks, "green");
+      renderStat(overview, "Taxa de clique", `${data.clickThroughRate}%`);
+      renderStat(overview, "Tempo médio na página", `${data.avgTimeOnPageSeconds}s`);
+      renderStat(overview, "Tempo mediano", `${data.medianTimeOnPageSeconds}s`);
+
+      renderBars(document.getElementById("scroll-bars"), data.scrollByMilestone, data.uniqueSessions);
+
+      const clickEntries = Object.entries(data.clicksByLocation).sort((a, b) => b[1] - a[1]);
+      renderTable(document.querySelector("#clicks-table tbody"), clickEntries, LOC_LABELS);
+
+      const dayEntries = Object.entries(data.byDay).sort((a, b) => (a[0] < b[0] ? 1 : -1));
+      renderTable(document.querySelector("#days-table tbody"), dayEntries);
+
+      const utmEntries = Object.entries(data.byUtmSource).sort((a, b) => b[1] - a[1]);
+      renderTable(document.querySelector("#utm-table tbody"), utmEntries);
+
+      document.getElementById("meta-line").textContent =
+        `Baseado nos últimos ${data.totalEventsProcessed} eventos · atualizado ${new Date(data.generatedAt).toLocaleString("pt-BR")}`;
+    }
+
+    async function boot(key) {
+      document.getElementById("gate").hidden = true;
+      document.getElementById("dashboard").hidden = false;
+      try {
+        const data = await loadStats(key);
+        render(data);
+      } catch (err) {
+        const errorEl = document.getElementById("load-error");
+        errorEl.textContent = err.message || "Erro ao carregar.";
+        errorEl.hidden = false;
+        if (err.message && err.message.includes("inválida")) {
+          document.getElementById("dashboard").hidden = true;
+          document.getElementById("gate").hidden = false;
+          document.getElementById("gate-error").textContent = "Chave inválida — confira o STATS_KEY na Vercel.";
+        }
+      }
+    }
+
+    document.getElementById("key-submit").addEventListener("click", () => {
+      const key = document.getElementById("key-input").value.trim();
+      if (!key) return;
+      storeKey(key);
+      boot(key);
+    });
+
+    document.getElementById("key-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("key-submit").click();
+    });
+
+    document.getElementById("refresh-btn").addEventListener("click", () => {
+      boot(getStoredKey());
+    });
+
+    const initialKey = getStoredKey();
+    if (initialKey) {
+      boot(initialKey);
+    }
+  </script>
+</body>
+</html>

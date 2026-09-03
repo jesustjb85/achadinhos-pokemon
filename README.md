@@ -2,6 +2,9 @@
 
 Landing page simples (HTML/CSS/JS puro, sem build, sem framework) para converter
 visitantes em membros do grupo do WhatsApp de cupons e achadinhos de cartas Pokémon.
+Tem também um analytics próprio (ver [Rastreamento (analytics)](#rastreamento-analytics)),
+que roda como duas Serverless Functions na Vercel — por isso o projeto tem um
+`package.json` e uma pasta `api/`, mas o site em si continua sem build.
 
 ## Como editar o link do WhatsApp
 
@@ -60,14 +63,57 @@ remoção/direitos autorais, já que o site se declara não afiliado a essas emp
 Pra trocar por outra imagem, basta substituir o arquivo `avatar.jpg` (mantenha o
 mesmo nome) ou editar o `src` da tag `<img>` dentro de `.avatar` em [index.html](index.html).
 
+## Rastreamento (analytics)
+
+O site manda 4 tipos de evento pra `/api/track` (que salva no Vercel Blob):
+`pageview`, `scroll` (25/50/75/100% da página), `click` (em qual dos 4 botões
+do WhatsApp — hero, teaser, final, flutuante) e `time` (segundos com a aba
+visível). Não guarda nome, telefone nem IP — só um id aleatório por visita.
+Isso é feito em [analytics.js](analytics.js) + [api/track.js](api/track.js).
+
+Pra ver os números agregados (pageviews, sessões, cliques por botão, tempo
+médio na página, funil de scroll, visitas por dia e por `utm_source`), abra
+`/stats.html` no site — é uma página interna, não linkada em lugar nenhum,
+protegida por uma chave. Os dados vêm de [api/stats.js](api/stats.js).
+
+**Setup necessário na Vercel (uma vez só):**
+
+1. No projeto na Vercel, vá na aba **Storage** → **Create Database** → **Blob**.
+2. Escolha um nome, marque o(s) ambiente(s) (pelo menos **Production**) e
+   confirme. A Vercel injeta automaticamente a variável `BLOB_READ_WRITE_TOKEN`
+   no projeto — não precisa copiar token nenhum na mão.
+3. Em **Settings → Environment Variables**, crie a variável `STATS_KEY` com
+   qualquer senha forte que só você conhece (ex: gere uma em
+   [1password.com/password-generator](https://1password.com/password-generator)
+   ou similar).
+4. Redeploy o projeto (qualquer novo `git push` já resolve).
+5. Acesse `https://<seu-site>.vercel.app/stats.html`, cole a mesma senha do
+   `STATS_KEY` e pronto — fica salva no navegador pras próximas vezes.
+
+**Sobre atribuir visitas ao anúncio:** coloque `?utm_source=facebook` (ou o
+nome da plataforma que estiver usando) no final do link que você usa nos
+anúncios — o `/stats.html` mostra a origem de cada leva de visitas separada
+por isso. Sem o parâmetro, a visita cai em "direto".
+
+**Limite:** cada evento vira um arquivinho no Blob Store — funciona bem pra
+volume de campanha pequena/média. Se crescer muito (milhares de eventos por
+dia, por muitos dias), o `/api/stats` fica mais lento porque ele lê os
+últimos 5000 eventos a cada consulta; nesse caso dá pra evoluir pra agregação
+incremental depois.
+
 ## Rodar localmente
 
-Não precisa de instalação nem build. Basta abrir `index.html` no navegador,
-ou usar qualquer servidor estático, por exemplo:
+O site (HTML/CSS/JS) não precisa de instalação nem build. Basta abrir
+`index.html` no navegador, ou usar qualquer servidor estático, por exemplo:
 
 ```bash
 npx serve .
 ```
+
+As Serverless Functions (`api/track.js`, `api/stats.js`) só rodam de verdade
+na Vercel (ou com `vercel dev`, que emula localmente) — abrindo `index.html`
+direto, os eventos de analytics simplesmente falham em silêncio, sem quebrar
+o resto do site.
 
 ## Deploy na Vercel (grátis)
 

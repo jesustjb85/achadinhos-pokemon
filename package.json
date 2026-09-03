@@ -1,0 +1,8 @@
+{
+  "name": "achadinhos-pokemon",
+  "private": true,
+  "description": "Landing page (site estático) + Serverless Functions de analytics na Vercel.",
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
+  }
+}
