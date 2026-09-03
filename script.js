@@ -3,7 +3,7 @@
 // Todos os botões da página (hero, teaser, final e o flutuante) usam
 // automaticamente este mesmo link.
 // =====================================================================
-const WHATSAPP_LINK = "https://chat.whatsapp.com/Ig0cFWFOVo21d1OwZ0HrGI?s=cl&p=i&mlu=4&ilr=4";
+const WHATSAPP_LINK = "https://chat.whatsapp.com/FS9hD7e0HgJIDMZh2pSjgH";
 
 // Prova social opcional: preencha com o número real de membros do grupo
 // (ex: "12.500") para exibir o selo "X membros" ao lado do CTA.
