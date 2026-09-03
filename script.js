@@ -52,3 +52,38 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+// =====================================================================
+// Promoção "grupo VIP liberado grátis": janela REAL e FIXA de campanha —
+// mesmo horário pra todo mundo que visitar (não é um contador que reinicia
+// a cada visita). Ajuste PROMO_START_AT / PROMO_END_AT se a data mudar.
+// Antes do início ou depois do fim, o aviso de preço "De/Por" fica oculto.
+// =====================================================================
+const PROMO_ORIGINAL_PRICE = "R$ 299,90";
+const PROMO_START_AT = "2026-09-03T09:00:00"; // início real da campanha
+const PROMO_END_AT = "2026-09-03T14:00:00"; // fim real da campanha (5h depois)
+
+function updatePromoBanner() {
+  const banner = document.getElementById("promo-banner");
+  const timer = document.getElementById("promo-countdown");
+  const priceEl = document.getElementById("promo-price");
+  if (!banner || !timer) return;
+  if (priceEl) priceEl.textContent = PROMO_ORIGINAL_PRICE;
+
+  const now = new Date();
+  if (now < new Date(PROMO_START_AT) || now >= new Date(PROMO_END_AT)) {
+    banner.hidden = true;
+    return;
+  }
+  banner.hidden = false;
+
+  const diff = new Date(PROMO_END_AT) - now;
+  const totalSeconds = Math.floor(diff / 1000);
+  const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const s = String(totalSeconds % 60).padStart(2, "0");
+  timer.textContent = `${h}:${m}:${s}`;
+}
+
+updatePromoBanner();
+setInterval(updatePromoBanner, 1000);

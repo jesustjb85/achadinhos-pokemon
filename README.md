@@ -24,6 +24,20 @@ hero sempre mostra o tempo até esse horário (hoje, ou amanhã se já passou). 
 horário que vocês realmente cumprem — um contador que não bate com a realidade
 derruba a confiança de quem entrar no grupo esperando a promoção naquele horário.
 
+## Como ajustar a campanha "De R$299,90 por Grátis"
+
+Em [script.js](script.js), `PROMO_ORIGINAL_PRICE`, `PROMO_START_AT` e `PROMO_END_AT`
+controlam o aviso "Grupo VIP — De: R$299,90 Por: GRÁTIS" que aparece na hero. O aviso
+só fica visível dentro da janela real definida (`PROMO_START_AT` até `PROMO_END_AT`) —
+antes ou depois disso ele some sozinho. Atualize essas datas sempre que rodar uma nova
+campanha, com o horário exato que vocês vão praticar (o preço "de" também deve ser o
+valor que o grupo realmente cobrava antes).
+
+**Nota:** o resto da página (selo "100% gratuito" no hero, FAQ, footer) continua
+descrevendo o grupo como gratuito o tempo todo — isso não muda automaticamente fora
+da janela da campanha. Se o grupo volta a ser pago depois da campanha, me avise pra
+eu ajustar esses textos também, senão eles ficam contradizendo o banner fora do horário.
+
 ## Como trocar o avatar do grupo
 
 O hero usa [avatar.jpg](avatar.jpg) (arte oficial "Pokémon Day 2025" da Nintendo/Game

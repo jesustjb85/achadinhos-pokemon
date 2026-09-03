@@ -123,6 +123,40 @@ summary:focus-visible {
   color: #4a4a5a;
 }
 
+.promo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 14px;
+  background: linear-gradient(135deg, #3a1414, #2a2a12);
+  border: 1px solid var(--red);
+  border-radius: 999px;
+  padding: 10px 20px;
+  margin: 0 auto 22px;
+  max-width: fit-content;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.promo-banner .promo-was {
+  color: var(--text-dim);
+}
+
+.promo-banner .promo-was s {
+  color: #ff8a8a;
+}
+
+.promo-banner .promo-now {
+  color: var(--green);
+  font-size: 1rem;
+}
+
+.promo-banner .promo-timer {
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+}
+
 h1 {
   font-size: clamp(1.8rem, 4.5vw, 3rem);
   margin: 0 0 16px;
