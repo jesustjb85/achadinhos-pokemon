@@ -16,6 +16,14 @@ de membros do grupo (ex: `"12.500"`) para o selo de prova social aparecer ao lad
 do botão no hero. Deixe em branco (`""`) para manter o selo oculto — evite números
 inventados, isso quebra a confiança de quem visita a página.
 
+## Como ajustar o contador de "próxima leva de cupons"
+
+Em [script.js](script.js), ajuste `NEXT_DROP_HOUR` e `NEXT_DROP_MINUTE` (formato
+24h) para o horário real em que vocês soltam cupons novos no grupo. O contador na
+hero sempre mostra o tempo até esse horário (hoje, ou amanhã se já passou). Use um
+horário que vocês realmente cumprem — um contador que não bate com a realidade
+derruba a confiança de quem entrar no grupo esperando a promoção naquele horário.
+
 ## Como trocar o avatar do grupo
 
 O hero usa [avatar.jpg](avatar.jpg) (arte oficial "Pokémon Day 2025" da Nintendo/Game

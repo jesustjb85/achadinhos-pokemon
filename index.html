@@ -22,7 +22,7 @@
 
   <!-- Faixa de urgência -->
   <div class="top-bar">
-    ⚡ Vagas limitadas · cupons novos revelados toda semana no grupo
+    ⚡ Vagas limitadas · promoção nova revelada todo dia no grupo
   </div>
 
   <header class="hero">
@@ -43,11 +43,15 @@
       </p>
 
       <div class="proof-row">
+        <span class="proof-pill">🔥 Promoção nova todo dia</span>
         <span class="proof-pill">✅ 100% gratuito</span>
         <span class="proof-pill">📉 Menor preço histórico todo dia</span>
         <!-- Preencha MEMBER_COUNT em script.js com o número real de membros para este selo aparecer -->
         <span class="proof-pill" id="member-pill" hidden>👥 <span id="member-count"></span> membros</span>
       </div>
+
+      <!-- O horário é configurado em script.js (NEXT_DROP_HOUR) — ajuste lá pro horário real de vocês -->
+      <p class="countdown-line">⏳ Próxima leva de cupons em <span id="countdown">--:--:--</span></p>
 
       <a href="#" id="cta-hero" class="btn-cta whatsapp-link" target="_blank" rel="noopener">
         <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
