@@ -54,14 +54,27 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // =====================================================================
-// Promoção "grupo VIP liberado grátis": janela REAL e FIXA de campanha —
-// mesmo horário pra todo mundo que visitar (não é um contador que reinicia
-// a cada visita). Ajuste PROMO_START_AT / PROMO_END_AT se a data mudar.
-// Antes do início ou depois do fim, o aviso de preço "De/Por" fica oculto.
+// Promoção "grupo VIP liberado grátis": SEM janela fixa de calendário.
+// A contagem começa do zero pra cada pessoa que abre a página (reseta a
+// cada visita) e dura PROMO_DURATION_MINUTES — quem controla o tempo real
+// que a promoção fica no ar é você, pelas contas de anúncio (pausando o
+// tráfego quando quiser) e/ou pelo PROMO_ACTIVE abaixo.
+//
+// PROMO_ACTIVE = interruptor manual. Mude pra false e suba (git push) pra
+// desligar o aviso na hora pra todo mundo, mesmo quem já estava com o
+// timer rodando — use isso se decidir tirar do ar antes das 5h, mesmo que
+// seja com só 1h.
+//
+// PROMO_DURATION_MINUTES = duração do timer que cada visitante vê a partir
+// do momento que entra no site. Use um número quebrado (não redondo) pra
+// parecer mais real — ex: 67 em vez de 60, 83 em vez de 90.
 // =====================================================================
+const PROMO_ACTIVE = true;
 const PROMO_ORIGINAL_PRICE = "R$ 299,90";
-const PROMO_START_AT = "2026-09-03T09:00:00"; // início real da campanha
-const PROMO_END_AT = "2026-09-03T14:00:00"; // fim real da campanha (5h depois)
+const PROMO_DURATION_MINUTES = 67;
+
+const promoDeadline = new Date(Date.now() + PROMO_DURATION_MINUTES * 60000);
+let promoInterval;
 
 function updatePromoBanner() {
   const banner = document.getElementById("promo-banner");
@@ -70,14 +83,14 @@ function updatePromoBanner() {
   if (!banner || !timer) return;
   if (priceEl) priceEl.textContent = PROMO_ORIGINAL_PRICE;
 
-  const now = new Date();
-  if (now < new Date(PROMO_START_AT) || now >= new Date(PROMO_END_AT)) {
+  const diff = promoDeadline - new Date();
+  if (!PROMO_ACTIVE || diff <= 0) {
     banner.hidden = true;
+    clearInterval(promoInterval);
     return;
   }
   banner.hidden = false;
 
-  const diff = new Date(PROMO_END_AT) - now;
   const totalSeconds = Math.floor(diff / 1000);
   const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
   const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
@@ -86,4 +99,4 @@ function updatePromoBanner() {
 }
 
 updatePromoBanner();
-setInterval(updatePromoBanner, 1000);
+promoInterval = setInterval(updatePromoBanner, 1000);

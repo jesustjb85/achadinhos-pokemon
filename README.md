@@ -26,17 +26,30 @@ derruba a confiança de quem entrar no grupo esperando a promoção naquele hor�
 
 ## Como ajustar a campanha "De R$299,90 por Grátis"
 
-Em [script.js](script.js), `PROMO_ORIGINAL_PRICE`, `PROMO_START_AT` e `PROMO_END_AT`
-controlam o aviso "Grupo VIP — De: R$299,90 Por: GRÁTIS" que aparece na hero. O aviso
-só fica visível dentro da janela real definida (`PROMO_START_AT` até `PROMO_END_AT`) —
-antes ou depois disso ele some sozinho. Atualize essas datas sempre que rodar uma nova
-campanha, com o horário exato que vocês vão praticar (o preço "de" também deve ser o
-valor que o grupo realmente cobrava antes).
+Em [script.js](script.js), três constantes controlam o aviso "Grupo VIP — De: R$299,90
+Por: GRÁTIS" que aparece na hero. **Não é mais uma janela fixa de calendário** — o
+contador reseta e recomeça do zero pra cada pessoa que abre o site:
+
+- `PROMO_ACTIVE`: interruptor geral. `true` = aviso ligado. Mude pra `false` e suba
+  (`git push`) pra desligar na hora pra todo mundo, mesmo quem já estava vendo o
+  contador rodar — é assim que você tira a promoção do ar quando quiser (ex: depois
+  de só 1h, em vez das 5h "cheias"), sem depender de data/hora nenhuma.
+- `PROMO_DURATION_MINUTES`: quantos minutos o contador roda a partir do momento em
+  que a pessoa entra no site. Use um número quebrado (não redondo) pra parecer mais
+  real — ex: `67` em vez de `60`, `83` em vez de `90`.
+- `PROMO_ORIGINAL_PRICE`: o valor "de" mostrado riscado (deve ser o preço que o grupo
+  realmente cobrava antes).
+
+Na prática, quem decide se a promoção está "no ar" é você — pelo tráfego que está
+mandando pelas contas de anúncio e, se quiser um desligamento imediato independente
+disso, pelo `PROMO_ACTIVE`. O `PROMO_DURATION_MINUTES` só afeta a contagem regressiva
+que cada visitante individual vê, não controla quando a campanha começa ou termina
+de verdade.
 
 **Nota:** o resto da página (selo "100% gratuito" no hero, FAQ, footer) continua
-descrevendo o grupo como gratuito o tempo todo — isso não muda automaticamente fora
-da janela da campanha. Se o grupo volta a ser pago depois da campanha, me avise pra
-eu ajustar esses textos também, senão eles ficam contradizendo o banner fora do horário.
+descrevendo o grupo como gratuito o tempo todo — isso não muda automaticamente quando
+`PROMO_ACTIVE` vira `false`. Se o grupo volta a ser pago depois da campanha, me avise
+pra eu ajustar esses textos também, senão eles ficam contradizendo a página.
 
 ## Como trocar o avatar do grupo
 
