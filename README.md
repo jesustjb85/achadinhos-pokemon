@@ -49,6 +49,18 @@ médio na página, funil de scroll, visitas por dia e por `utm_source`), abra
 `/stats.html` no site — é uma página interna, não linkada em lugar nenhum,
 protegida por uma chave. Os dados vêm de [api/stats.js](api/stats.js).
 
+### Meta Pixel
+
+Além do analytics próprio, o site também manda os eventos pro Meta Pixel
+(pra otimização de entrega e público semelhante no Gerenciador de Anúncios).
+O código-base fica em [index.html](index.html) (dispara `PageView` sozinho);
+os eventos de `ScrollDepth` (customizado) e `Contact` (padrão, um por clique
+em botão do WhatsApp, com o local do clique em `content_name`) são disparados
+em [analytics.js](analytics.js), nos mesmos pontos que já mandam pro
+`/api/track`. Trocar o ID do pixel: procure `2276185082785454` em
+[index.html](index.html) (duas ocorrências — no `fbq('init', ...)` e no
+`<noscript>`).
+
 **Setup necessário na Vercel (uma vez só):**
 
 1. No projeto na Vercel, vá na aba **Storage** → **Create Database** → **Blob**.

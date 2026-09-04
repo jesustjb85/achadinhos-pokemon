@@ -58,6 +58,13 @@
     }).catch(() => {});
   }
 
+  // Meta Pixel: dispara junto com o analytics próprio, sem duplicar a
+  // lógica de "quando" disparar. O PageView do pixel já sai sozinho no
+  // <head> (index.html) — aqui só os eventos de scroll e clique.
+  function fbTrack(...args) {
+    if (typeof window.fbq === "function") window.fbq(...args);
+  }
+
   // ---- Pageview ----
   send("pageview");
 
@@ -77,6 +84,7 @@
       if (pct >= m && !reached.has(m)) {
         reached.add(m);
         send("scroll", m);
+        fbTrack("trackCustom", "ScrollDepth", { percent: m });
       }
     }
 
@@ -103,7 +111,12 @@
   // pra saber qual deles converte mais.
   document.querySelectorAll(".whatsapp-link").forEach((el) => {
     el.addEventListener("click", () => {
-      send("click", el.dataset.loc || "desconhecido");
+      const loc = el.dataset.loc || "desconhecido";
+      send("click", loc);
+      // "Contact" é o evento padrão da Meta pra início de contato via
+      // WhatsApp/telefone/chat — usável pra otimização de entrega e
+      // público semelhante (quem clica) dentro do Gerenciador de Anúncios.
+      fbTrack("track", "Contact", { content_name: loc });
     });
   });
 
