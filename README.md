@@ -61,6 +61,28 @@ em [analytics.js](analytics.js), nos mesmos pontos que já mandam pro
 [index.html](index.html) (duas ocorrências — no `fbq('init', ...)` e no
 `<noscript>`).
 
+### Subir membros existentes do grupo pro Meta (eventos offline)
+
+Pra "recuperar" quem entrou no grupo antes do pixel existir (ou quem entra
+por fora do site), tem um script em
+[tools/meta-offline-events.js](tools/meta-offline-events.js) que manda uma
+lista de telefones direto pra API de Conversões da Meta, associada ao mesmo
+pixel — sem depender da tela "Conectar dados → Offline" do Gerenciador de
+Eventos (que em contas novas costuma vir bloqueada). Instruções completas de
+uso (onde pegar o token, formato do CSV, como rodar) estão comentadas no
+topo do próprio arquivo. Resumo:
+
+```bash
+# 1) Gere o token em Gerenciador de Eventos → dataset "pokemon" →
+#    Configurações → API de Conversões → Gerar token de acesso.
+# 2) Prepare um CSV local (NÃO commitar — tools/membros*.csv já está
+#    no .gitignore) com colunas "phone" e, se tiver, "date".
+META_ACCESS_TOKEN="seu-token" node tools/meta-offline-events.js tools/membros.csv
+```
+
+Nenhum telefone é commitado no repositório nem enviado a lugar nenhum além
+da própria Meta (a chamada é direta pra `graph.facebook.com`).
+
 **Setup necessário na Vercel (uma vez só):**
 
 1. No projeto na Vercel, vá na aba **Storage** → **Create Database** → **Blob**.

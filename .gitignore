@@ -1,3 +1,9 @@
 .vercel
 .DS_Store
 node_modules
+
+# Nunca versionar: lista de membros (telefone é dado pessoal) e
+# token de acesso da API de Conversões da Meta.
+tools/membros*.csv
+numeros*.csv
+.env
