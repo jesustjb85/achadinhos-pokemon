@@ -27,33 +27,6 @@ hero sempre mostra o tempo até esse horário (hoje, ou amanhã se já passou). 
 horário que vocês realmente cumprem — um contador que não bate com a realidade
 derruba a confiança de quem entrar no grupo esperando a promoção naquele horário.
 
-## Como ajustar a campanha "De R$299,90 por Grátis"
-
-Em [script.js](script.js), três constantes controlam o aviso "Grupo VIP — De: R$299,90
-Por: GRÁTIS" que aparece na hero. **Não é mais uma janela fixa de calendário** — o
-contador reseta e recomeça do zero pra cada pessoa que abre o site:
-
-- `PROMO_ACTIVE`: interruptor geral. `true` = aviso ligado. Mude pra `false` e suba
-  (`git push`) pra desligar na hora pra todo mundo, mesmo quem já estava vendo o
-  contador rodar — é assim que você tira a promoção do ar quando quiser (ex: depois
-  de só 1h, em vez das 5h "cheias"), sem depender de data/hora nenhuma.
-- `PROMO_DURATION_MINUTES`: quantos minutos o contador roda a partir do momento em
-  que a pessoa entra no site. Use um número quebrado (não redondo) pra parecer mais
-  real — ex: `67` em vez de `60`, `83` em vez de `90`.
-- `PROMO_ORIGINAL_PRICE`: o valor "de" mostrado riscado (deve ser o preço que o grupo
-  realmente cobrava antes).
-
-Na prática, quem decide se a promoção está "no ar" é você — pelo tráfego que está
-mandando pelas contas de anúncio e, se quiser um desligamento imediato independente
-disso, pelo `PROMO_ACTIVE`. O `PROMO_DURATION_MINUTES` só afeta a contagem regressiva
-que cada visitante individual vê, não controla quando a campanha começa ou termina
-de verdade.
-
-**Nota:** o resto da página (selo "100% gratuito" no hero, FAQ, footer) continua
-descrevendo o grupo como gratuito o tempo todo — isso não muda automaticamente quando
-`PROMO_ACTIVE` vira `false`. Se o grupo volta a ser pago depois da campanha, me avise
-pra eu ajustar esses textos também, senão eles ficam contradizendo a página.
-
 ## Como trocar o avatar do grupo
 
 O hero usa [avatar.jpg](avatar.jpg) (arte oficial "Pokémon Day 2025" da Nintendo/Game

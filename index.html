@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#12121a" />
+  <meta name="theme-color" content="#ffcb05" />
   <meta name="format-detection" content="telephone=no" />
   <title>PromoPokémon — Achadinhos e Cupons de Cartas Pokémon</title>
   <meta name="description" content="Cupons escondidos, achadinhos e preços muito abaixo do mercado em cartas Pokémon. Entre no grupo PromoPokémon no WhatsApp e não perca nenhuma promoção." />
@@ -20,9 +20,9 @@
 </head>
 <body>
 
-  <!-- Faixa de urgência -->
+  <!-- Faixa de destaque -->
   <div class="top-bar">
-    ⚡ Vagas limitadas · promoção nova revelada todo dia no grupo
+    ⚡ Cupom novo revelado todo dia no grupo
   </div>
 
   <header class="hero">
@@ -30,18 +30,11 @@
 
       <div class="avatar-wrap">
         <div class="avatar">
-          <img src="avatar.jpg" alt="PromoPokémon" width="1280" height="960" loading="eager" fetchpriority="high" />
+          <img src="avatar.jpg" alt="PromoPokémon" width="360" height="270" loading="eager" fetchpriority="high" decoding="async" />
         </div>
         <span class="avatar-online" aria-hidden="true"></span>
       </div>
       <p class="avatar-caption">PromoPokémon <span class="dot" aria-hidden="true">•</span> 🟢 ativo agora</p>
-
-      <!-- Controlado por PROMO_ACTIVE / PROMO_DURATION_MINUTES em script.js -->
-      <div class="promo-banner" id="promo-banner" hidden>
-        <span class="promo-was">Grupo VIP — De: <s id="promo-price">R$ 299,90</s></span>
-        <span class="promo-now">Por: GRÁTIS</span>
-        <span class="promo-timer">⏳ acaba em <span id="promo-countdown">--:--:--</span></span>
-      </div>
 
       <h1>Grupo VIP <span class="highlight">PromoPokémon</span> 🔥</h1>
       <p class="subtitle">
@@ -55,7 +48,7 @@
         </svg>
         Entrar no Grupo VIP
       </a>
-      <p class="microcopy">Grátis · Vagas limitadas · Saia quando quiser</p>
+      <p class="microcopy">Grátis · Sem pegadinha · Saia quando quiser</p>
 
       <div class="proof-row">
         <span class="proof-pill">🔥 Promoção nova todo dia</span>
@@ -79,6 +72,31 @@
   </nav>
 
   <main>
+    <section class="how container">
+      <h2>Como funciona</h2>
+      <p class="section-sub">Simples assim — sem pegadinha, sem taxa escondida.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span class="step-icon">📲</span>
+          <h3>Entra no grupo grátis</h3>
+          <p>Um toque no botão verde abre o WhatsApp direto no convite.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span class="step-icon">👀</span>
+          <h3>Vê o cupom do dia</h3>
+          <p>Cada achadinho chega com link, preço e instrução de resgate.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span class="step-icon">🛒</span>
+          <h3>Compra antes de acabar</h3>
+          <p>Ofertas relâmpago somem rápido — quem tá no grupo vê primeiro.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="benefits container">
       <h2>O que você recebe entrando no grupo</h2>
       <div class="grid">
@@ -152,7 +170,13 @@
       <h2>Não perca o próximo cupom 🎯</h2>
       <p>Entre agora e fique por dentro de todo achadinho antes que acabe.</p>
       <a href="#" class="btn-cta whatsapp-link" data-loc="final" target="_blank" rel="noopener">Entrar no Grupo VIP agora</a>
-      <p class="microcopy">Grátis · Vagas limitadas · Saia quando quiser</p>
+      <p class="microcopy">Grátis · Sem pegadinha · Saia quando quiser</p>
+
+      <div class="trust-row">
+        <span class="trust-pill">🔒 Sem spam, só achadinho</span>
+        <span class="trust-pill">🎮 Feito por fã, pra fã</span>
+        <span class="trust-pill">🚪 Sai quando quiser</span>
+      </div>
     </section>
   </main>
 
