@@ -369,10 +369,6 @@ section h2 {
   gap: 10px;
 }
 
-.coupon-card .lock {
-  font-size: 1.5rem;
-}
-
 .coupon-card .blurred {
   font-family: "Courier New", monospace;
   font-size: 1.2rem;

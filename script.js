@@ -52,3 +52,14 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+// Mostra o horário real (ex.: "20h" ou "20h30") no card de oferta ainda
+// não revelada, usando o mesmo horário configurado acima — evita ficar um
+// "🔒" genérico sem compromisso com a realidade.
+const revealTimeEl = document.getElementById("reveal-time");
+if (revealTimeEl) {
+  revealTimeEl.textContent =
+    NEXT_DROP_MINUTE > 0
+      ? `${NEXT_DROP_HOUR}h${String(NEXT_DROP_MINUTE).padStart(2, "0")}`
+      : `${NEXT_DROP_HOUR}h`;
+}
