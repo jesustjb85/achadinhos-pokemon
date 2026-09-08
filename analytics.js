@@ -117,6 +117,10 @@
       // WhatsApp/telefone/chat — usável pra otimização de entrega e
       // público semelhante (quem clica) dentro do Gerenciador de Anúncios.
       fbTrack("track", "Contact", { content_name: loc });
+      // "Lead" também é disparado no mesmo clique pra permitir campanhas
+      // com objetivo de Geração de Cadastro (Leads) — no conjunto de
+      // anúncios, escolha o evento "Lead" como meta de otimização.
+      fbTrack("track", "Lead", { content_name: loc });
     });
   });
 
